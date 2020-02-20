@@ -1,25 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./reset.css";
+import "./App.css";
+import logo from "./assets/img/Marvel-Logo.svg";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  Redirect
+} from "react-router-dom";
+
+import Home from "./containers/Home";
+import Characters from "./containers/Characters";
+import Comics from "./containers/Comics";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <Router>
+      <header className="logo">
+        <Link to="/">
+          <img src={logo} alt="Marvel" />
+        </Link>
+        <Link to="/characters">
+          <button className="character">PERSONNAGES</button>
+        </Link>
+        <Link to="/comics">
+          <button className="comics">BANDES DESSINÉES</button>
+        </Link>
+        <Link to="/favoris">
+          <button className="favoris">FAVORIS</button>
+        </Link>
       </header>
-    </div>
+      <Switch>
+        <Route exact path="/characters">
+          <Characters />
+        </Route>
+        <Route exact path="/comics">
+          <Comics />
+        </Route>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route></Route>
+        <Route></Route>
+      </Switch>
+      <footer>THE END</footer>
+    </Router>
   );
 }
 
